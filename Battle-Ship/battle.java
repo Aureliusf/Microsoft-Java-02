@@ -11,7 +11,6 @@ public class battle {
     }
 
     public static char[][] init(){
-        //return new char[][]{{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'},{'o','o','o','o','o','o','o','o','o','o'}};
         return new char[][]{{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '}};
     }
 
@@ -67,13 +66,12 @@ public class battle {
         return map;
     }
     public static char[][] userDeploy(char map[][]){
-        //Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
         System.out.println("You have to put the coordinates separated by commas, 3,1 or 4,2");
         int n =0;
         while (n<5){
-            //System.out.print("Where do you want to put your ship?");
-            int[] coordinates = { (int) (Math.random() * 5+5),(int) (Math.random() *10) };
-            //int[] coordinates = translate(input.nextLine());
+            System.out.print("Where do you want to put your ship?");
+            int[] coordinates = translate(input.nextLine());
             if (checkUserField(coordinates) && checkPosition(map,coordinates, (char) ' ')){
                 map[coordinates[0]][coordinates[1]]='1';
                 n++;
@@ -141,7 +139,7 @@ public class battle {
     public static void comp(char[][] map, int hits, int downs){
         System.out.println("Computer's turn");
         int[] coordinates = { (int) (Math.random() * 5+5),(int) (Math.random() *10) };
-        System.out.println("Computer aims to "+ Arrays.toString(coordinates));
+        System.out.println("Computer aims at "+ Arrays.toString(coordinates));
 
         if (checkUserField(coordinates) && checkPosition(map,coordinates, '1')){
             map[coordinates[0]][coordinates[1]]='x';
@@ -162,8 +160,7 @@ public class battle {
     public static int[] translate(String coordinates){
         char ic = coordinates.charAt(0);
         char jc = coordinates.charAt(2);
-        //System.out.println(ic);
-        //System.out.println(jc);
+
         return new int[]{Character.getNumericValue(ic),Character.getNumericValue(jc)};
     }
     public static boolean checkPosition(char[][] map, int[] coordinates, char ch){
